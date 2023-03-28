@@ -115,5 +115,5 @@ class _MovieHomeScreenState extends State<MovieHomeScreen> {
 // auto_route
 
 void setAppBarTitle(){
-  PreferenceUtils.setString('titleBarKey', 'DEFAULT VALUE');
+  PreferenceUtils.setString('titleBarKey', 'CHICKEN BIRYANI');
 }
