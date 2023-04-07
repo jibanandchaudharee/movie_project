@@ -8,7 +8,7 @@ import 'package:movie_project/feature/counter/data/models/movie_details_model.da
 class MovieRepository {
   MovieRepository(this._movieDataSource);
 
-  late final MovieDataSource _movieDataSource;
+  late final MovieDataSourceImpl _movieDataSource;
 
   /// calls [_movieDataSource] methods passing the  [url]
   Future<List<MovieCardModel>> getUpcomingMovies({required String url}) async {
@@ -19,5 +19,10 @@ class MovieRepository {
 
     return await _movieDataSource.fetchMovieDetails(movieId:movieId);
 
+  }
+
+  void searchMovie({required String queryFromCubit})async {
+
+    _movieDataSource.searchMovie(query:queryFromCubit);
   }
 }

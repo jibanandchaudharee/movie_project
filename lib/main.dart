@@ -2,21 +2,27 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:movie_project/core/router.dart';
+import 'package:movie_project/core/utils/hive_storage.dart';
 import 'package:movie_project/core/utils/shared_pref.dart';
 import 'package:movie_project/feature/counter/data/data_source/movie_data_source.dart';
 import 'package:movie_project/feature/counter/data/repository/movie_repository.dart';
 import 'package:movie_project/feature/counter/presentation/blocs/movie_cubit/movie_details_cubit/movie_details_cubit.dart';
+import 'package:movie_project/feature/counter/presentation/blocs/movie_search%20cubit/movie_search_cubit.dart';
 import 'feature/counter/presentation/blocs/movie_cubit/movie_cubit.dart';
 
 GetIt getIt = GetIt.instance;
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   getIt.registerLazySingleton<MovieCubit>(() => MovieCubit());
+  getIt.registerLazySingleton<MovieSearchCubit>(() => MovieSearchCubit());
   getIt.registerLazySingleton<MovieDetailsCubit>(() => MovieDetailsCubit());
   getIt.registerLazySingleton<Dio>(() => Dio());
   getIt.registerLazySingleton<AppRouter>(() => AppRouter());
-  getIt.registerLazySingleton<MovieRepository>(() => MovieRepository(MovieDataSource()));
+  getIt.registerLazySingleton<MovieRepository>(() => MovieRepository(MovieDataSourceImpl()));
   PreferenceUtils.init();
+  //HiveUtils.initDb();
   runApp( MyApp());
 }
 

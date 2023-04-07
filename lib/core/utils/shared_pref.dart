@@ -23,7 +23,7 @@ class PreferenceUtils {
   }
 
   static String getString(String key, [String? defValue]) {
-    return _prefsInstance?.getString(key) ?? defValue ?? "Default Value";
+    return _prefsInstance?.getString(key) ?? defValue ?? "DEFAULT VALUE";
   }
 
   static Future<bool> setString(String key, String value) async {

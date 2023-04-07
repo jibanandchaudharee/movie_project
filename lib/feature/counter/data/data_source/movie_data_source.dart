@@ -6,10 +6,10 @@ import 'package:movie_project/main.dart';
 
 /// Data source where all the api calls are handled
 
-class MovieDataSource implements MovieDataSourceAbs {
+class MovieDataSourceImpl implements MovieDataSource {
   /// initializing dio client
   /// when the object of MovieDataSource is created
-  MovieDataSource() {
+  MovieDataSourceImpl() {
     _dioClient = getIt<Dio>();
   }
 
@@ -57,9 +57,21 @@ class MovieDataSource implements MovieDataSourceAbs {
     }
     return movieDetailsModel;
   }
+
+  @override
+  void searchMovie({required String query}) async{
+    final String searchApiPath = '${MovieConstants.movieSearchUrl}query=$query';
+    final Response<Map<String,dynamic>>response =
+          await _dioClient.get(searchApiPath);
+    //print("Search movie ${response.data}");
+  }
 }
 
-abstract class MovieDataSourceAbs {
+
+abstract class MovieDataSource {
   Future<List<MovieCardModel>> fetchUpcomingMovies(
       {required String upcomingMovies});
+
+
+  searchMovie({required String query});
 }

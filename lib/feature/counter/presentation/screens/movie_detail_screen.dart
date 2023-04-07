@@ -1,8 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_project/core/utils/hive_storage.dart';
 import 'package:movie_project/core/utils/shared_pref.dart';
 import 'package:movie_project/feature/counter/data/models/movie_details_model.dart';
 
-
+@RoutePage()
 class MovieDetailScreen extends StatefulWidget {
   const MovieDetailScreen({Key? key, required this.movieDetailsModel})
       : super(key: key);
@@ -18,7 +20,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
   @override
   void initState() {
     super.initState();
-    appBarTitle= getAppBarTitle();
+    appBarTitle= getAppBarTitleFromHive();
   }
   @override
   Widget build(BuildContext context) {
@@ -79,5 +81,9 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
 
 
 String getAppBarTitle(){
-  return PreferenceUtils.getString('titleBarKey', "Set our default value");
+  return PreferenceUtils.getString('titleBarKey');
+}
+
+String getAppBarTitleFromHive(){
+  return HiveUtils.getString('titleBarKey');
 }
